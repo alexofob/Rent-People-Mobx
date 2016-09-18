@@ -14,7 +14,7 @@ import { renderCurrentView } from '../../stores/router';
 
 
 @inject('viewStore', 'routerStore') @observer
-class App extends React.Component { 
+class App extends React.Component {
     render() {
         const { routerStore, viewStore } = this.props;
         const { isSnackbarOpened, snackbarMessage, closeSnackbar } = viewStore;
@@ -37,7 +37,7 @@ class App extends React.Component {
                     autoHideDuration={5000}
                     onRequestClose={closeSnackbar}
                 />
-            </Box>       
+            </Box>
         )
     }
 }

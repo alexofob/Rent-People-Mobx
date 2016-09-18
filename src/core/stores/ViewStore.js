@@ -1,20 +1,20 @@
-import { observable, action } from 'mobx';
+import { observable, action } from "mobx";
 
 class ViewStore {
 
-    @observable isSnackbarOpened = false;
-    @observable snackbarMessage = ' ';
-    @observable isLeftNavOpened = false;
+  @observable isSnackbarOpened = false;
+  @observable snackbarMessage = " ";
+  @observable isLeftNavOpened = false;
 
-    @action closeSnackbar = () => this.isSnackbarOpened = false;
-    
-    @action openSnackbar = () => this.isSnackbarOpened = true;
+  @action closeSnackbar = () => (this.isSnackbarOpened = false);
 
-    @action setSnackbarMessage = (message) => this.SnackbarMessage = message;
+  @action openSnackbar = () => (this.isSnackbarOpened = true);
 
-    @action openLeftNav = () => this.isLeftNavOpened = true;
+  @action setSnackbarMessage = message => (this.snackbarMessage = message);
 
-    @action closeLeftNav = () => this.isLeftNavOpened = false;
+  @action openLeftNav = () => (this.isLeftNavOpened = true);
+
+  @action closeLeftNav = () => (this.isLeftNavOpened = false);
 
 }
 
@@ -23,4 +23,3 @@ const viewStore = new ViewStore();
 export default viewStore;
 
 export { ViewStore };
-

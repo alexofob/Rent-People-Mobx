@@ -1,4 +1,4 @@
-import { observable , computed, action } from 'mobx';
+import { observable, computed } from "mobx";
 
 class UserStore {
   // fetch = null;
@@ -14,25 +14,13 @@ class UserStore {
   }
 
   @computed get user() {
-    if (this.currentUser.firstName !== null) {
+    if (this.currentUser == null) {
+      return "Anonymous";
+    } else if (this.currentUser.firstName !== null) {
       return this.currentUser.firstName;
-    }
-    else if (this.currentUser.email !== null) {
+    } else if (this.currentUser.email !== null) {
       return this.currentUser.email;
-    }
-    else return "Anonymous";
-    }
-
-
-  @action performLogin(username, password, callback) {
-      this.fetch(`/json/${username}-${password}.json`)
-          .then(user => {
-              this.currentUser = user
-              callback(true)
-          })
-          .catch(err => {
-              callback(false)
-          })
+    } return "Unknown";
   }
 
 }

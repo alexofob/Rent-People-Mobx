@@ -20,7 +20,7 @@ module.exports = {
     commonjs: true,
     es6: true,
     jest: true,
-    node: true
+    node: true,
   },
 
   parserOptions: {
@@ -29,8 +29,8 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
       generators: true,
-      experimentalObjectRestSpread: true
-    }
+      experimentalObjectRestSpread: true,
+    },
   },
 
   settings: {
@@ -41,9 +41,9 @@ module.exports = {
     'import/extensions': ['.js'],
     'import/resolver': {
       node: {
-        extensions: ['.js', '.json']
-      }
-    }
+        extensions: ['.js', '.json'],
+      },
+    },
   },
 
   rules: {
@@ -85,9 +85,9 @@ module.exports = {
         ['&', '|', '^', '~', '<<', '>>', '>>>'],
         ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
         ['&&', '||'],
-        ['in', 'instanceof']
+        ['in', 'instanceof'],
       ],
-      allowSamePrecedence: false
+      allowSamePrecedence: false,
     }],
     'no-multi-str': 'warn',
     'no-native-reassign': 'warn',
@@ -191,6 +191,6 @@ module.exports = {
     // https://github.com/gajus/eslint-plugin-flowtype
     'flowtype/define-flow-type': 'warn',
     'flowtype/require-valid-file-annotation': 'warn',
-    'flowtype/use-flow-type': 'warn'
-  }
+    'flowtype/use-flow-type': 'warn',
+  },
 };

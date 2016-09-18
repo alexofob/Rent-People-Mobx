@@ -1,20 +1,20 @@
-import { observable, computed, action } from 'mobx';
+import { observable, computed, action } from "mobx";
 
 class RouterStore {
 
     @observable currentView = null;
 
     @computed get currentPath() {
-        switch(this.currentView.name) {
-            case "home": return "/"
-            default: return "/"
-        }
+      switch (this.currentView.name) {
+      case "home": return "/";
+      default: return "/";
+      }
     }
 
     @action showHome = () => {
-        this.currentView = {
-            name: "home",
-        }
+      this.currentView = {
+        name: "home",
+      };
     }
 
 }
