@@ -81,3 +81,19 @@ body.fontLoaded {
   min-height: 100%;
   min-width: 100%;
 }
+
+.separator {
+  width: 100%;
+  border-bottom: 1px solid #60636a;
+  text-align: center;
+  height: 18px;
+  margin-bottom: 15px;
+}
+.separator span {
+  line-height: 15px;
+  padding: 0 10px;
+  background: white; /* Color of the element below */
+  display: inline-block;
+  margin-top: 10px;
+  color: #60636a;
+}

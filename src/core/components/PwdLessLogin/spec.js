@@ -1,28 +1,26 @@
+/* eslint import/no-extraneous-dependencies: ['error', {'devDependencies': true}] */
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import PwdLessLogin from '../../containers/Account/PwdLessLogin';
+import PwdLessLogin from './index';
+import loginForm from '../../stores/LoginForm';
 
 
-storiesOf('Account.PwdLessLogin', module)
-  .add('default view', () => (
-    <PwdLessLogin
-      onFacebookLogin={action('click the Facebook button')}
-      handleSubmit={action('click the Submit button')}
-      submitting={false}
-    />
+/*const loginForm = {
+  fields: {
+    email: {
+      name: 'email',
+      label: 'Email Address',
+    },
+  },
+  isValid: true,
+};*/
+
+/*loginForm.loginWithFacebook = action('Login with Facebook');
+loginForm.loginWithGoogle = action('Login with Google');
+loginForm.loginPwdless = action('Login Passwordless'); */
+
+storiesOf('Core.PwdLessLogin', module)
+  .add('Default view', () => (
+    <PwdLessLogin loginForm={loginForm} />
   ))
-  .add('submitting view', () => (
-    <PwdLessLogin
-      onFacebookLogin={action('click the Facebook button')}
-      handleSubmit={action('click the Submit button')}
-      submitting
-    />
-  ))
-  .add('error view', () => (
-    <PwdLessLogin
-      onFacebookLogin={action('click the Facebook button')}
-      handleSubmit={action('click the Submit button')}
-      submitting={false}
-    />
-  ))
-;
+  ;

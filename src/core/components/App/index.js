@@ -3,7 +3,6 @@ import Helmet from 'react-helmet';
 import { Box } from 'reflexbox';
 import { observer, inject } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
-import '../styles.css';
 
 // Import Components
 import Snackbar from 'material-ui/Snackbar';
@@ -11,7 +10,7 @@ import Footer from './Footer';
 
 
 import { renderCurrentView } from '../../stores/router';
-
+import '../styles.css';
 
 @inject('viewStore', 'routerStore') @observer
 class App extends React.Component {

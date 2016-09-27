@@ -6,6 +6,7 @@ var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 var WatchMissingNodeModulesPlugin = require('../scripts/utils/WatchMissingNodeModulesPlugin');
 var paths = require('./paths');
 var env = require('./env');
+const Dotenv = require('dotenv-webpack');  // Makes it possible to set permanent env variables with .env file.
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -168,7 +169,7 @@ module.exports = {
           'last 4 versions',
           'Firefox ESR',
           'not ie < 9', // React doesn't support IE8 anyway
-        ]
+        ],
       }),
     ];
   },
@@ -181,6 +182,8 @@ module.exports = {
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'development') { ... }. See `env.js`.
     new webpack.DefinePlugin(env),
+    // Makes it possible to load environment variables from .env
+    new Dotenv(),
     // This is necessary to emit hot updates (currently CSS only):
     new webpack.HotModuleReplacementPlugin(),
     // Watcher doesn't work well if you mistype casing in a path so we use

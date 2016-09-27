@@ -1,10 +1,10 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import { HomePageContainer }from './index';
+import { HomePage } from './index';
 
 /// Prepare stores
 const routerStore = {
-  
+
 };
 const userStore = {
   isAuthenticated: false
@@ -21,7 +21,7 @@ routerStore.showHome = action('show home page');
 
 storiesOf('Core.HomePage', module)
   .add('default view', () => (
-    <HomePageContainer
+    <HomePage
       viewStore={viewStore}
       userStore={userStore}
       routerStore={routerStore}

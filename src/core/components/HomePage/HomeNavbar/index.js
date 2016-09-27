@@ -4,42 +4,46 @@
 *
 */
 
-import React, { PropTypes } from "react";
-import { observer } from "mobx-react";
-import cssModules from "react-css-modules";
-import RaisedButton from "material-ui/RaisedButton";
-import { Toolbar, ToolbarGroup, ToolbarTitle } from "material-ui/Toolbar";
-import FlatButton from "material-ui/FlatButton";
-import Drawer from "material-ui/Drawer";
-import AppBar from "material-ui/AppBar";
-import { Flex } from "reflexbox";
+import React, { PropTypes } from 'react';
+import { observer, inject } from 'mobx-react';
+import cssModules from 'react-css-modules';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
+import FlatButton from 'material-ui/FlatButton';
+import Drawer from 'material-ui/Drawer';
+import Dialog from 'material-ui/Dialog';
+import AppBar from 'material-ui/AppBar';
+import { Flex } from 'reflexbox';
+import { ViewStore } from '../../../stores/ViewStore';
+import { UserStore } from '../../../stores/UserStore';
+import { RouterStore } from '../../../stores/RouterStore';
 
-import HomeNavBarStyles from "./styles.css";
-import AuthNav from "./AuthNav";
-import PublicNav from "./PublicNav";
-import MobilePublicNav from "./MobilePublicNav";
-import MobileAuthNav from "./MobileAuthNav";
+
+import HomeNavBarStyles from './styles.css';
+import AuthNav from './AuthNav';
+import PublicNav from './PublicNav';
+import MobilePublicNav from './MobilePublicNav';
+import MobileAuthNav from './MobileAuthNav';
+
+import PwdLessLogin from '../../PwdLessLogin';
 
 
 const styles = {
   brand: {
-    textDecoration: "none",
-    color: "black",
+    textDecoration: 'none',
+    color: 'black',
     fontSize: 20,
     fontWeight: 500,
     letterSpacing: 2,
-    cursor: "pointer",
+    cursor: 'pointer',
   },
   dialogContent: {
-    width: "90%",
-    maxWidth: 320,
-    display: "flex",
-    flexDirection: "column",
+    width: '90%',
+    maxWidth: 420,
   },
 };
 
-
-const HomeNavBar = observer(({ viewStore, userStore, routerStore }) => (
+let HomeNavBar = ({ viewStore, userStore, routerStore }) => (
   <nav role="navigation">
     <Toolbar styleName="desktop-only">
       <ToolbarGroup >
@@ -56,7 +60,7 @@ const HomeNavBar = observer(({ viewStore, userStore, routerStore }) => (
               onLogout={userStore.handleLogout}
               firstName={userStore.user}
             /> :
-            <PublicNav showLoginDialog={viewStore.showLoginDialog} />}
+            <PublicNav showLoginDialog={viewStore.openDialog} />}
         </Flex>
         <FlatButton label="Services" />
         <RaisedButton label="List your house" secondary />
@@ -65,7 +69,7 @@ const HomeNavBar = observer(({ viewStore, userStore, routerStore }) => (
     <AppBar
       title="Rent People"
       styleName="mobile-only"
-      titleStyle={{ ...styles.brand, textAlign: "center" }}
+      titleStyle={{ ...styles.brand, textAlign: 'center' }}
       onLeftIconButtonTouchTap={viewStore.openLeftNav}
       onTitleTouchTap={routerStore.showHome}
     />
@@ -80,26 +84,28 @@ const HomeNavBar = observer(({ viewStore, userStore, routerStore }) => (
           handleLogout={userStore.handleLogout}
           firstName={userStore.user}
         /> :
-        <MobilePublicNav showLoginDialog={viewStore.showLoginDialog} />}
+        <MobilePublicNav showLoginDialog={viewStore.openDialog} />}
     </Drawer>
+    <Dialog
+      title="Log in"
+      modal={false}
+      open={viewStore.isDialogOpened}
+      onRequestClose={viewStore.closeDialog}
+      contentStyle={styles.dialogContent}
+      autoScrollBodyContent
+    >
+      <PwdLessLogin />
+    </Dialog>
 
   </nav>
-));
+);
 
 HomeNavBar.propTypes = {
-  routerStore: PropTypes.shape({
-    showHome: React.PropTypes.func.isRequired,
-  }),
-  viewStore: PropTypes.shape({
-    showLoginDialog: React.PropTypes.func,
-    openLeftNav: React.PropTypes.bool.isRequired,
-    closeLeftNav: React.PropTypes.func,
-  }),
-  userStore: PropTypes.shape({
-    isAuthenticated: React.PropTypes.bool.isRequired,
-    handleLogout: React.PropTypes.func.isRequired,
-    user: React.PropTypes.string.isRequired,
-  }),
+  routerStore: PropTypes.instanceOf(RouterStore),
+  viewStore: PropTypes.instanceOf(ViewStore),
+  userStore: PropTypes.instanceOf(UserStore),
 };
 
-export default cssModules(HomeNavBar, HomeNavBarStyles);
+HomeNavBar = cssModules(HomeNavBar, HomeNavBarStyles);
+
+export default inject('viewStore', 'userStore', 'routerStore')(observer(HomeNavBar));

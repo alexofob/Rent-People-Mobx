@@ -9,7 +9,6 @@ module.exports = {
         // enable additional rules
         "indent": ["error", 2],
         "linebreak-style": ["error", "unix"],
-        "quotes": ["error", "double"],
         "semi": ["error", "always"],
 
         // override default options for rules from base configurations
@@ -20,5 +19,6 @@ module.exports = {
 
         // personal preferences
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "no-confusing-arrow": ["error", {"allowParens": true}],
     }
 };

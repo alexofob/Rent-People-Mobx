@@ -29,4 +29,14 @@ describe("ViewStore", () => {
     store.closeLeftNav();
     expect(store.isLeftNavOpened).toBe(false);
   });
+  it("opens login dialog", () => {
+    const store = new ViewStore();
+    store.openDialog();
+    expect(store.isDialogOpened).toBe(true);
+  });
+  it("closes login dialog", () => {
+    const store = new ViewStore();
+    store.closeDialog();
+    expect(store.isDialogOpened).toBe(false);
+  });
 });

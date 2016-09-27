@@ -1,3 +1,4 @@
+/*  global document */
 /**
  * index.js
  *
@@ -12,16 +13,19 @@ import FontFaceObserver from 'fontfaceobserver';
 import { useStrict } from 'mobx';
 import { Provider } from 'mobx-react';
 
-import { startRouter } from './core/stores/router';
-import * as stores from './core/stores';
-
-import App from './core/components/App';
-
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { grey200, black } from 'material-ui/styles/colors';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import { startRouter } from './core/stores/router';
+import * as stores from './core/stores';
+import App from './core/components/App';
+
+// Observe loading of Roboto (to remove roboto, remove the <link> tag in
+// the index.html file and this observer)
+import styles from './core/components/styles.css';
 
 // Needed for onTouchTap
 // Can go away when react 1.0 release
@@ -29,9 +33,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
 
-// Observe loading of Roboto (to remove roboto, remove the <link> tag in
-// the index.html file and this observer)
-import styles from './core/components/styles.css';
+
 const robotoObserver = new FontFaceObserver('Roboto', {});
 
 // When Roboto is loaded, add a font-family using Roboto to the body
@@ -55,9 +57,8 @@ const muiTheme = getMuiTheme({
 
 ReactDOM.render(
   <MuiThemeProvider muiTheme={muiTheme}>
-    <Provider { ...stores }>
-      <App 
-    />
+    <Provider {...stores} >
+      <App />
     </Provider>
   </MuiThemeProvider>,
     document.querySelector('#root')

@@ -5,16 +5,22 @@ class ViewStore {
   @observable isSnackbarOpened = false;
   @observable snackbarMessage = " ";
   @observable isLeftNavOpened = false;
+  @observable isDialogOpened = false;
 
   @action closeSnackbar = () => (this.isSnackbarOpened = false);
 
-  @action openSnackbar = () => (this.isSnackbarOpened = true);
-
-  @action setSnackbarMessage = message => (this.snackbarMessage = message);
+  @action notifyUser = (message) => {
+    this.snackbarMessage = message;
+    this.isSnackbarOpened = true;
+  }
 
   @action openLeftNav = () => (this.isLeftNavOpened = true);
 
   @action closeLeftNav = () => (this.isLeftNavOpened = false);
+
+  @action openDialog = () => (this.isDialogOpened = true);
+
+  @action closeDialog = () => (this.isDialogOpened = false);
 
 }
 

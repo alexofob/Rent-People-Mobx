@@ -10,7 +10,6 @@ import Helmet from 'react-helmet';
 import { observer } from 'mobx-react';
 import { mayBeStubbed } from 'react-stubber';
 
-
 // Import Components
 import HomeNavbar from './HomeNavbar';
 import IntroHeader from './IntroHeader';
@@ -19,7 +18,7 @@ import FeatureDesc from './FeatureDesc';
 import CallToAction from './CallToAction';
 
 
-const HomePage = ({ viewStore, userStore, routerStore }) => (
+export const HomePage = ({ viewStore, userStore, routerStore }) => (
   <div>
     <Helmet
       title="Home"
@@ -31,7 +30,7 @@ const HomePage = ({ viewStore, userStore, routerStore }) => (
       viewStore={viewStore}
       userStore={userStore}
       routerStore={routerStore}
-   />
+    />
     <IntroHeader />
     <HouseList />
     <FeatureDesc />
@@ -47,6 +46,4 @@ HomePage.propTypes = {
 
 // Applies mayBeStubbed for React Storybook
 
-export default mayBeStubbed(observer(['viewStore', 'userStore', 'routerStore'], HomePage)); 
-
-export const HomePageContainer = observer(['viewStore', 'userStore', 'routerStore'], HomePage);
+export default mayBeStubbed(observer(['viewStore', 'userStore', 'routerStore'], HomePage));
