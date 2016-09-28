@@ -33,7 +33,7 @@ class App extends React.Component {
                 <Snackbar
                     open={isSnackbarOpened}
                     message={snackbarMessage}
-                    autoHideDuration={5000}
+                    autoHideDuration={8000}
                     onRequestClose={closeSnackbar}
                 />
             </Box>

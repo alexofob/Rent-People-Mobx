@@ -3,9 +3,10 @@ import { observable, action } from "mobx";
 class ViewStore {
 
   @observable isSnackbarOpened = false;
-  @observable snackbarMessage = " ";
+  @observable snackbarMessage = ' ';
   @observable isLeftNavOpened = false;
   @observable isDialogOpened = false;
+  @observable dialogContent = 'login';
 
   @action closeSnackbar = () => (this.isSnackbarOpened = false);
 
@@ -21,6 +22,10 @@ class ViewStore {
   @action openDialog = () => (this.isDialogOpened = true);
 
   @action closeDialog = () => (this.isDialogOpened = false);
+
+  @action showLoginDialog = () => (this.dialogContent = 'login');
+
+  @action showValidateLoginDialog = () => (this.dialogContent = 'validateLogin')
 
 }
 

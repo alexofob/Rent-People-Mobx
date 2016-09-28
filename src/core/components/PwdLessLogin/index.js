@@ -17,7 +17,7 @@ const styles = {
 };
 
 const PwdlessLogin = () => {
-  // const { name, value, label, sync, error } = loginForm.$('email');
+  const { name, value, label, sync, error } = loginForm.$('email');
   return (
     <Box col={12}>
       <Flex column >
@@ -44,12 +44,12 @@ const PwdlessLogin = () => {
         </Box>
         <form onSubmit={loginForm.handleOnSubmit} >
           <TextField
-            name={loginForm.fields.email.name}
-            value={loginForm.$('email').value}
-            floatingLabelText={loginForm.$('email').label}
-            onChange={loginForm.$('email').sync}
+            name={name}
+            value={value}
+            floatingLabelText={label}
+            onChange={sync}
             fullWidth
-            errorText={loginForm.$('email').error}
+            errorText={error}
           /><br />
           <Flex
             pt={2}
@@ -61,7 +61,7 @@ const PwdlessLogin = () => {
                 type="submit"
                 secondary
                 fullWidth
-                label="LOG IN"
+                label="Request Log in Code"
                 disabled={!loginForm.isValid}
               />
             </Box>

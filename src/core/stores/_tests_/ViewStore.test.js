@@ -9,15 +9,11 @@ describe("ViewStore", () => {
     store.closeSnackbar();
     expect(store.isSnackbarOpened).toBe(false);
   });
-  it("opens snackbar", () => {
+  it("notifies user of an event", () => {
     const store = new ViewStore();
-    store.openSnackbar();
+    store.notifyUser('message');
     expect(store.isSnackbarOpened).toBe(true);
-  });
-  it("sets snackbar message", () => {
-    const store = new ViewStore();
-    store.setSnackbarMessage("Test Message");
-    expect(store.snackbarMessage).toBe("Test Message");
+    expect(store.snackbarMessage).toBe('message');
   });
   it("opens side bar navigation", () => {
     const store = new ViewStore();
@@ -39,4 +35,14 @@ describe("ViewStore", () => {
     store.closeDialog();
     expect(store.isDialogOpened).toBe(false);
   });
+  it("shows login dialog", () => {
+    const store = new ViewStore();
+    store.showLoginDialog();
+    expect(store.dialogContent).toBe('login');
+  });
+  it("shows validate login dialog", () => {
+    const store = new ViewStore();
+    store.showValidateLoginDialog();
+    expect(store.dialogContent).toBe('validateLogin');
+});
 });

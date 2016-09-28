@@ -26,6 +26,7 @@ import MobilePublicNav from './MobilePublicNav';
 import MobileAuthNav from './MobileAuthNav';
 
 import PwdLessLogin from '../../PwdLessLogin';
+import ValidateLogin from '../../ValidateLogin';
 
 
 const styles = {
@@ -41,6 +42,11 @@ const styles = {
     width: '90%',
     maxWidth: 420,
   },
+};
+
+const dialogContent = {
+  login: { node: <PwdLessLogin />, title: 'Log In' },
+  validateLogin: { node: <ValidateLogin />, title: 'Enter your code to log in' },
 };
 
 let HomeNavBar = ({ viewStore, userStore, routerStore }) => (
@@ -87,14 +93,14 @@ let HomeNavBar = ({ viewStore, userStore, routerStore }) => (
         <MobilePublicNav showLoginDialog={viewStore.openDialog} />}
     </Drawer>
     <Dialog
-      title="Log in"
+      title={dialogContent[viewStore.dialogContent].title}
       modal={false}
       open={viewStore.isDialogOpened}
       onRequestClose={viewStore.closeDialog}
       contentStyle={styles.dialogContent}
       autoScrollBodyContent
     >
-      <PwdLessLogin />
+      {dialogContent[viewStore.dialogContent].node}
     </Dialog>
 
   </nav>
