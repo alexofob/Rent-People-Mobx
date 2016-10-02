@@ -22,6 +22,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { startRouter } from './core/stores/router';
 import * as stores from './core/stores';
 import App from './core/components/App';
+import auth0 from './core/stores/utils/Auth0';
 
 // Observe loading of Roboto (to remove roboto, remove the <link> tag in
 // the index.html file and this observer)
@@ -57,7 +58,7 @@ const muiTheme = getMuiTheme({
 
 ReactDOM.render(
   <MuiThemeProvider muiTheme={muiTheme}>
-    <Provider {...stores} >
+    <Provider {...stores} auth0={auth0} >
       <App />
     </Provider>
   </MuiThemeProvider>,

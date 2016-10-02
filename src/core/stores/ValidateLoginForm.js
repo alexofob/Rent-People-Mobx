@@ -1,16 +1,23 @@
+/* eslint class-methods-use-this: "off"*/
 /* global window */
 import Form from 'mobx-react-form';
 import validatorjs from 'validatorjs';
 import { viewStore } from './';
+import auth0 from './utils/Auth0';
 
 
 class ValidateLoginForm extends Form {
 
   onSuccess(form) {
     // get field values
-    const email = form.values();
-    console.log('Form Values!', email);
+    const code = form.values();
+    console.log('Form Values!', code);
 
+    // login user with the code received from email
+    auth0.login(code);
+
+    // close the login window
+    viewStore.closeDialog();
   }
 
   onError(form) {

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { observable , action } from 'mobx';
+import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
 import Popover from 'material-ui/Popover';
 import FlatButton from 'material-ui/FlatButton';
@@ -9,8 +9,8 @@ import AuthMenu from '../AuthMenu';
 
 @observer
 class AuthNav extends React.Component {
-  @observable open = false; 
-  @observable anchorEl = null; 
+  @observable open = false;
+  @observable anchorEl = null;
 
   @action handleMouseOver = (event) => {
     // This prevents ghost click.
@@ -18,11 +18,10 @@ class AuthNav extends React.Component {
 
     this.open = true;
     this.anchorEl = event.currentTarget;
-
   };
 
-  @action handleRequestClose = () => this.open = false;
-  
+  @action handleRequestClose = () => (this.open = false);
+
 
   render() {
     const { firstName, handleLogout } = this.props;
@@ -31,7 +30,7 @@ class AuthNav extends React.Component {
         <FlatButton
           onMouseOver={this.handleMouseOver}
           label={firstName}
-          labelStyle={{textTransform: 'capitalize'}}
+          labelStyle={{ textTransform: 'capitalize' }}
           labelPosition="before"
           icon={<MdPerson />}
         />

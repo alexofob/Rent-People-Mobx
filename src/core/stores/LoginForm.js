@@ -1,15 +1,9 @@
 /* global window */
+/* eslint class-methods-use-this: "off"*/
 import Form from 'mobx-react-form';
 import validatorjs from 'validatorjs';
-import Auth0 from 'auth0-js';
+import auth0 from './utils/Auth0';
 import { viewStore } from './';
-
-const auth0 = new Auth0({
-  clientID: 'TXWykyAVhmmTmkdnkFiDktvRkVFkIIx2',
-  domain: 'rentpeople.auth0.com',
-  responseType: 'token',
-  callbackURL: window.location.href,
-});
 
 class LoginForm extends Form {
 
@@ -19,16 +13,7 @@ class LoginForm extends Form {
     console.log('Form Values!', email);
 
     // redirects the call to auth0 instance
-    auth0.requestEmailCode(email, (err) => {
-      if (err) {
-        viewStore.notifyUser('Unable to send mail!, please try again.');
-        return;
-      }
-      viewStore.notifyUser('Validation Code has been sent to your email address.' +
-      ' Please use the code to login.');
-      viewStore.showValidateLoginDialog();
-
-    });
+    auth0.sendMail(email);
   }
 
   onError(form) {

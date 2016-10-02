@@ -17,6 +17,7 @@ import { Flex } from 'reflexbox';
 import { ViewStore } from '../../../stores/ViewStore';
 import { UserStore } from '../../../stores/UserStore';
 import { RouterStore } from '../../../stores/RouterStore';
+import { AuthService } from '../../../stores/utils/Auth0';
 
 
 import HomeNavBarStyles from './styles.css';
@@ -49,7 +50,7 @@ const dialogContent = {
   validateLogin: { node: <ValidateLogin />, title: 'Enter your code to log in' },
 };
 
-let HomeNavBar = ({ viewStore, userStore, routerStore }) => (
+let HomeNavBar = ({ viewStore, userStore, routerStore, auth0 }) => (
   <nav role="navigation">
     <Toolbar styleName="desktop-only">
       <ToolbarGroup >
@@ -63,7 +64,7 @@ let HomeNavBar = ({ viewStore, userStore, routerStore }) => (
         <Flex align="center">
           {userStore.isAuthenticated ?
             <AuthNav
-              onLogout={userStore.handleLogout}
+              handleLogout={auth0.logout}
               firstName={userStore.user}
             /> :
             <PublicNav showLoginDialog={viewStore.openDialog} />}
@@ -87,7 +88,7 @@ let HomeNavBar = ({ viewStore, userStore, routerStore }) => (
     >
       {userStore.isAuthenticated ?
         <MobileAuthNav
-          handleLogout={userStore.handleLogout}
+          handleLogout={auth0.logout}
           firstName={userStore.user}
         /> :
         <MobilePublicNav showLoginDialog={viewStore.openDialog} />}
@@ -110,8 +111,9 @@ HomeNavBar.propTypes = {
   routerStore: PropTypes.instanceOf(RouterStore),
   viewStore: PropTypes.instanceOf(ViewStore),
   userStore: PropTypes.instanceOf(UserStore),
+  auth0: PropTypes.instanceOf(AuthService),
 };
 
 HomeNavBar = cssModules(HomeNavBar, HomeNavBarStyles);
 
-export default inject('viewStore', 'userStore', 'routerStore')(observer(HomeNavBar));
+export default inject('viewStore', 'userStore', 'routerStore', 'auth0')(observer(HomeNavBar));

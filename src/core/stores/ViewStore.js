@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, action } from 'mobx';
 
 class ViewStore {
 
@@ -21,11 +21,14 @@ class ViewStore {
 
   @action openDialog = () => (this.isDialogOpened = true);
 
-  @action closeDialog = () => (this.isDialogOpened = false);
+  @action closeDialog = () => {
+    this.isDialogOpened = false;
+    this.dialogContent = 'login';
+  }
 
   @action showLoginDialog = () => (this.dialogContent = 'login');
 
-  @action showValidateLoginDialog = () => (this.dialogContent = 'validateLogin')
+  @action showValidateLoginDialog = () => (this.dialogContent = 'validateLogin');
 
 }
 

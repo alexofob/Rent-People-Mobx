@@ -1,12 +1,14 @@
 /* eslint no-unused-prop-types: 'off'*/
-import React from 'react';
+import React, { PropTypes } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Flex, Box } from 'reflexbox';
 import FaFacebookOfficial from 'react-icons/lib/fa/facebook-official';
 import FaGoogle from 'react-icons/lib/fa/google';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import loginForm from '../../stores/LoginForm';
+import { AuthService } from '../../stores/utils/Auth0';
+
 
 import accountStyles from '../styles.css';
 
@@ -16,7 +18,7 @@ const styles = {
   },
 };
 
-const PwdlessLogin = () => {
+const PwdlessLogin = ({ auth0 }) => {
   const { name, value, label, sync, error } = loginForm.$('email');
   return (
     <Box col={12}>
@@ -26,7 +28,7 @@ const PwdlessLogin = () => {
             primary
             label="Log in with Facebook"
             fullWidth
-            onTouchTap={loginForm.handleOnSubmit}
+            onTouchTap={auth0.facebookLogin}
             icon={<FaFacebookOfficial />}
             style={styles.buttons}
           />
@@ -35,7 +37,7 @@ const PwdlessLogin = () => {
           secondary
           label="Log in with Google"
           fullWidth
-          onTouchTap={loginForm.handleOnSubmit}
+          onTouchTap={auth0.googleLogin}
           icon={<FaGoogle />}
           style={styles.buttons}
         />
@@ -72,6 +74,9 @@ const PwdlessLogin = () => {
   );
 };
 
-// Applies mayBeStubbed for React Storybook
+PwdlessLogin.propTypes = {
+  auth0: PropTypes.instanceOf(AuthService),
+};
 
-export default observer(PwdlessLogin);
+// Applies mayBeStubbed for React Storybook
+export default inject('auth0')(observer(PwdlessLogin));
